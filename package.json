@@ -1,0 +1,28 @@
+{
+  "name": "mortgageestimationmodel",
+  "version": "1.0.0",
+  "description": "A Model for Morgage Estimation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YuanSun/MortgageEstimationModel.git"
+  },
+  "keywords": [
+    "Financial"
+  ],
+  "author": "Yuan Sun",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/YuanSun/MortgageEstimationModel/issues"
+  },
+  "homepage": "https://github.com/YuanSun/MortgageEstimationModel#readme",
+  "dependencies": {
+    "angular": "^1.6.9",
+    "express": "^4.16.3",
+    "mongoose": "^5.0.10",
+    "underscore": "^1.8.3"
+  }
+}
