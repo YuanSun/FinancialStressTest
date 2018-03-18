@@ -10,10 +10,6 @@ var hbs = exphbs.create({/* config */
     helpers: {
         foo: function() {return 'FOO!';},
         bar: function() {return 'BAR!';}
-    },
-    
-    data:   {
-        para1: function() {return 1;}
     }
 });
 var routes = require('./routes/index');
@@ -43,7 +39,7 @@ app.get('/', (req, res, next) => {
         },
 
         data: {
-            para1: function() {return 1;}
+            param:  function() {return 1;}
         }
     });
 });
