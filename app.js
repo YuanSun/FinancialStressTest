@@ -14,7 +14,7 @@ var hbs = exphbs.create({/* config */
 });
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var incomeTaxCalculator = require('./model/incomeTax');
+var incomeTaxCalculator = require('./controllers/incomeTaxCalculator');
 var app = express();
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
