@@ -18,7 +18,19 @@
     <p>{{bar}}</p>
 
     <div class="data">
-        {{data.param}}
+        {{data.param}}<br> {{data.income.incomes}} <br> {{data.income.incomeTax}} <br> {{data.income.incomeAfterTax}}
     </div>
+<!--
+    <form onSubmit="return handleIncomeCalculation()">
+        Income <input type="text" name="Income" value="60000"><br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <div class="income-tax-result">
+        <label>Income before tax: {{data.income}}</label></br>
+        <label>Income tax: {{data.incomeTax}}</label></br>
+        <label>Income after tax: {{data.incomeAfterTax}}</label></br>
+    </div>
+    -->
 </body>
 </html>

@@ -14,7 +14,7 @@ var hbs = exphbs.create({/* config */
 });
 var routes = require('./routes/index');
 var users = require('./routes/users');
-
+var incomeTaxCalculator = require('./model/incomeTax');
 var app = express();
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
@@ -29,6 +29,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //app.use('/', routes);
 //app.use('/users', users);
+var incomes = [50000, 60000, 70000, 80000, 90000, 100000, 110000, 120000, 130000, 140000, 150000, 160000, 170000, 180000, 190000, 200000];
+
+var incomeTax = [];
+var incomeAfterTax = [];
+incomes.forEach(function(income) {
+    incomeTax.push(incomeTaxCalculator(income));
+    incomeAfterTax.push(income - incomeTaxCalculator(income));
+});
 
 app.get('/', (req, res, next) => {
     res.render('home', {
@@ -39,7 +47,13 @@ app.get('/', (req, res, next) => {
         },
 
         data: {
-            param:  function() {return 1;}
+            param:  function() {return 1;},
+            income: {
+                incomes:    JSON.stringify(incomes),
+                incomeTax:  JSON.stringify(incomeTax),
+                incomeAfterTax: JSON.stringify(incomeAfterTax)
+            }
+            
         }
     });
 });

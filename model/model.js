@@ -7,7 +7,7 @@
  * 4. Down payment ratio / down payment amount
  */
 
-var input = require('./input');
+var incomeTax = require('./incomeTax.js');
 
 var DEFAULT_VALUE_PROFILE1 = { // profile 1
   rent :         1200,
@@ -36,5 +36,4 @@ var DEFAULT_VALUE_PROFILE1 = { // profile 1
   */
 var rent = input.rent || DEFAULT_VALUE_PROFILE1.rent;
 var utilities = input.utilities || DEFAULT_VALUE_PROFILE1.utilities;
-var 
 
