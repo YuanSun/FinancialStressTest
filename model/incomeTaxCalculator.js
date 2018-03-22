@@ -1,4 +1,4 @@
-var marginalIncomeTaxRate = require('../model/incomeTax');
+var marginalIncomeTaxRate = require('./incomeTax');
 
 function bruteForceSearchRate(taxRateLevels, income) {
     if (taxRateLevels === null || taxRateLevels === undefined) {
