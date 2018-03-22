@@ -36,4 +36,3 @@ var DEFAULT_VALUE_PROFILE1 = { // profile 1
   */
 var rent = input.rent || DEFAULT_VALUE_PROFILE1.rent;
 var utilities = input.utilities || DEFAULT_VALUE_PROFILE1.utilities;
-
