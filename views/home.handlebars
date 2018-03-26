@@ -20,17 +20,35 @@
     <div class="data">
         {{data.param}}<br> Income: {{data.income.incomes}} <br> Income Tax: {{data.income.incomeTax}} <br> Income After Tax:{{data.income.incomeAfterTax}}
     </div>
-<!--
-    <form onSubmit="return handleIncomeCalculation()">
-        Income <input type="text" name="Income" value="60000"><br>
-        <input type="submit" value="Submit">
-    </form>
 
-    <div class="income-tax-result">
-        <label>Income before tax: {{data.income}}</label></br>
-        <label>Income tax: {{data.incomeTax}}</label></br>
-        <label>Income after tax: {{data.incomeAfterTax}}</label></br>
-    </div>
-    -->
+    <div ng-app="myApp">    
+        <div ng-controller="myCtrl">
+            <form>
+            Rate:
+            <input type="text" ng-model="rate">
+            <br>
+            <br> Number of Period:
+            <input type="text" ng-model="nper">
+            <br>
+            <br> Payment:
+            <input type="text" ng-model="pmt">
+            <br>
+            <br> PV: 
+            <input type="text" ng-model="pv">
+            <br>
+            <br> FV: 
+            <input type="text" ng-model="fv">
+            <br>
+            <div class="dropdown">
+                <button onclick="selectCalculator()" class="dropbtn">Select Calculator</button>
+                <div id="calculatorDropdown" class="dropdown-content">
+                    <a href="PV">PV</a>
+                    <a href="FV">FV</a>
+                </div>
+            </div>            
+            <input type="submit" value="Submit" ng-click="submit()">
+            </form>
+        </div>
+  </div>
 </body>
 </html>
