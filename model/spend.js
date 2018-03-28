@@ -1,3 +1,7 @@
+/**
+ * Spend include Daily spend, house, car, utility, education, loan payment
+ */
+
 function DailySpend(rent, foodAndShopping, extra) {
     this.rent = rent;
     this.foodAndShopping = foodAndShopping;
@@ -17,12 +21,7 @@ function HouseSpend(houseMortgage, houseInsurance, houseMaintenance, extra) {
     this.houseMaintenance = houseMaintenance;
     this.extra = extra;
 
-    this.total = 0;
-    arguments.array.forEach(element => {
-        if(typeof(element) ==='number'){
-            total += element;
-        }
-    });
+    this.total = sumup(arguments.array);
 }
 
 function CarSpend(leaase, loan, carInsurance, maintenance, extra) {
@@ -32,12 +31,7 @@ function CarSpend(leaase, loan, carInsurance, maintenance, extra) {
     this.maintenance = maintenance;
     this.extra = extra;
 
-    this.total = 0;
-    arguments.array.forEach(element => {
-        if(typeof(element) ==='number'){
-            total += element;
-        }
-    });
+    this.total = sumup(arguments.array);
 }
 
 function Utilities(electricity, network, transport, houseInsurance, carInsurance, gas, cellphone) {
@@ -49,12 +43,7 @@ function Utilities(electricity, network, transport, houseInsurance, carInsurance
     this.gas = gas;
     this.cellphone = cellphone;
 
-    this.total = 0;
-    arguments.array.forEach(element => {
-        if(typeof(element) ==='number'){
-            total += element;
-        }
-    });
+    this.total = sumup(arguments.array);
 }
 
 function Loan (studentLoan, creditCardLoan, extra) {
@@ -62,12 +51,25 @@ function Loan (studentLoan, creditCardLoan, extra) {
     this.creditCardLoan = creditCardLoan;
     this.extra = extra;
 
-    this.total = 0;
-    arguments.array.forEach(element => {
+    this.total = sumup(arguments.array);
+}
+
+function Education(tuition, extra) {
+    this.tuition = tuition;
+    this.extra = extra;
+
+    this.total = sumup(arguments.array);
+}
+
+function sumup(arr) {
+    var total = 0;
+    arr.forEach(element => {
         if(typeof(element) ==='number'){
             total += element;
         }
     });
+
+    return total;
 }
 
 module.exports = {
