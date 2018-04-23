@@ -40,13 +40,15 @@ module.exports.calculateTax = function(req, res) {
     var totalTax = federalTax + quebecTax;
     var marginalTaxRate = Math.round(totalTax / income * 100) / 100;
     var afterTax = income - totalTax;
+    var monthlyDisposable = Math.round(afterTax / 12 * 100) / 100;
     var incomeTax = {
         income: income,
         federal: federalTax,
         quebec: quebecTax,
         totalTax : totalTax,
         marginalTaxRate : marginalTaxRate,
-        afterTax : afterTax
+        afterTax : afterTax,
+        monthlyDisposable : monthlyDisposable
     };
 
     if(income) {
