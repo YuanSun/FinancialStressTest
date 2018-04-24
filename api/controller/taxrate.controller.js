@@ -1,9 +1,9 @@
-var taxRate2017 = require('../data/incomeTaxRate.js');
+var taxRate = require('../data/incomeTaxRate.js');
 
 module.exports.taxRate2017 = function(req, res) {
     res
         .status(200)
-        .json(taxRate2017);
+        .json(taxRate);
 }
 
 module.exports.calculateTax = function(req, res) {
@@ -16,22 +16,39 @@ module.exports.calculateTax = function(req, res) {
     }
     var income = parseFloat(req.params.income);
     
+    var incomeTax = calculateTax(income, taxRate);
+
+    if(income) {
+        res
+        .status(200)
+        .json(incomeTax);
+    }
+    
+}
+
+var calculateTax = function(income, taxRate) {
+    if(isNaN(income)){
+        return {
+            "message" : "income is not valid"
+        }
+    }
+
     // calculate taxIncome
-    var rateArr = Object.keys(taxRate2017);
+    var rateArr = Object.keys(taxRate);
     var arrLength = rateArr.length
     var applicableIncomeTaxRate = {};
 
     if(income && income < rateArr[0]) {
-        applicableIncomeTaxRate = taxRate2017[rateArr[0]]; 
+        applicableIncomeTaxRate = taxRate[rateArr[0]]; 
     }
 
     if(income && income > rateArr[arrLength - 1]) {
-        applicableIncomeTaxRate = taxRate2017[rateArr[arrLength - 1]];
+        applicableIncomeTaxRate = taxRate[rateArr[arrLength - 1]];
     }
 
     for(var i = 0; i < rateArr.length - 1; i++) {
         if(income >= rateArr[i] && income < rateArr[i+1]) {
-            applicableIncomeTaxRate = taxRate2017[rateArr[i]];
+            applicableIncomeTaxRate = taxRate[rateArr[i]];
         }
     }
 
@@ -41,6 +58,7 @@ module.exports.calculateTax = function(req, res) {
     var marginalTaxRate = Math.round(totalTax / income * 100) / 100;
     var afterTax = income - totalTax;
     var monthlyDisposable = Math.round(afterTax / 12 * 100) / 100;
+
     var incomeTax = {
         income: income,
         federal: federalTax,
@@ -51,10 +69,6 @@ module.exports.calculateTax = function(req, res) {
         monthlyDisposable : monthlyDisposable
     };
 
-    if(income) {
-        res
-        .status(200)
-        .json(incomeTax);
-    }
+    return incomeTax;
     
-}
+} 
