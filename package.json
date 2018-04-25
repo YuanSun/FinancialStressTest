@@ -21,8 +21,9 @@
   "homepage": "https://github.com/YuanSun/MortgageEstimationModel#readme",
   "dependencies": {
     "angular": "^1.6.9",
-    "angular-route": "^1.6.9",
+    "angular-route": "^1.6.10",
     "cookie-parser": "^1.4.3",
+    "d3": "^5.1.0",
     "express": "^4.16.3",
     "express-generator": "^4.15.5",
     "express-handlebars": "^3.0.0",

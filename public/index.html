@@ -1,16 +1,27 @@
 <!DOCTYPE html>
 <html ng-app="incometax">
     <head>
-        <title>Mean hotel</title>
-        <link href="css/bootstrap.min.css" rel="stylesheet" />
+        <title>Financial Stress Test</title>
+        <!-- <link href="css/bootstrap.min.css" rel="stylesheet" /> -->
         <link href="css/custom.css" rel="stylesheet" />
-        
+        <link href="css/main.css" rel="stylesheet" />
+        <link href="css/util.css" rel="stylesheet" />
+        <!--===============================================================================================-->
+	    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css" />
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css" />
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css" />
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css" />
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css" />
     </head>
 
     <body>
         <div ng-view></div>
         
-        <footer class="footer">
+        <!-- <footer class="footer">
             <div class="container">
                 <p class="text-muted text-center">
                     <a href="http://apple.com" target="_blank"><img src="/images/apple.png" height="26" alt="Full Stack Training"</a>
@@ -19,15 +30,13 @@
                     <small>&copy; Income Tax Calculation</small>
                 </p>
             </div>
-        </footer>
+        </footer> -->
 
-        <script src="jquery/jquery-3.3.1.min.js"></script>
+        <script src="js/jquery/jquery-3.3.1.min.js"></script>
         <script src="node_modules/angular/angular.js"></script>
         <script src="node_modules/angular-route/angular-route.js"></script>
         <script src="angular-app/app.js"></script>
-        <script src="angular-app/hotel-list/hotel-list-controller.js"></script>
-        <script src="angular-app/hotel-display/hotel-display-controller.js"></script>
-        <script src="angular-app/hotel-data-factory/hotel-data-factory.js"></script>
-        <script src="angular-app/hotel-rating/hotel-rating-directive.js"></script>
+        <script src="angular-app/tax-list/tax-list-controller.js"></script>
+        <script src="angular-app/income-tax-data-factory/income-tax-data-factory.js"></script>
     </body>
 </html>

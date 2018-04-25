@@ -1,11 +1,11 @@
-angular.module('incometax').factory('incomeTax', function($http) {
+angular.module('incometax').factory('incomeTaxFactory', function($http) {
     return {
         taxRate: function() {
             return $http.get('/api/taxrate').then(complete).catch(failed);
         },
         
         incomeTax: function(income) {
-            return $http.get('/api/calculateTax/:' + income).then(complete).catch(failed);
+            return $http.get('/api/calculateTax/' + income).then(complete).catch(failed);
         }
         // hotelList : hotelList,
         // hotelDisplay : hotelDisplay

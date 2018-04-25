@@ -1,0 +1,40 @@
+
+<h3 style="margin-left: 80px; margin-top: 20px;">{{vm.title}}</h3>
+<!-- <ul>
+    <li ng-repeat="(threshold, rate) in vm.taxRate">{{threshold}} : 
+        <ul>
+            <li ng-repeat="(k, v) in rate">{{k}} -- {{v}}% </li>
+        </ul>
+    </li>
+</ul> -->
+<div class="income-tax-rate">
+    <div class="table100 ver1 m-b-110 col-sm-4" style="margin-left: 80px; margin-top:20px; float:left;">
+        <div class="table100-head">
+            <table>
+                <thead>
+                    <tr class="row100 head">
+                        <th class="cell100 column1">Taxable income</th>
+                        <th class="cell100 column2">Federal</th>
+                        <th class="cell100 column2">Quebec</th>
+                        <th class="cell100 column2">Total</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="table100-body js-pscroll">
+            <table>
+                <tbody>
+                    <tr class="row100 body" ng-repeat="(income, rate) in vm.taxRate">
+                        <td class="cell100 column1">{{income}}</td>
+                        <td class="cell100 column2" ng-repeat="(k, v) in rate">{{v}} %</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="income-chart col-sm-6" style="margin-left: 80px; margin-top:20px; display: inline-block;">
+        <div id="chart"></div>
+    </div>
+
+</div>

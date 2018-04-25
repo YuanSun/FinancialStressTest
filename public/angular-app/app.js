@@ -6,14 +6,9 @@ angular.module('incometax',['ngRoute'])
 
 function config($routeProvider) {
     $routeProvider
-        .when('/', {
-            templateUrl : 'angular-app/hotel-list/hotels.html',
-            controller: HotelsController,
+        .when('/taxrate', {
+            templateUrl : 'angular-app/tax-list/tax.html',
+            controller: TaxRateController,
             controllerAs: 'vm'
-        })
-        .when('/hotel/:id', {
-            templateUrl : 'angular-app/hotel-display/hotel.html',
-            controller : HotelController,
-            controllerAs : 'vm'
         });
 }
