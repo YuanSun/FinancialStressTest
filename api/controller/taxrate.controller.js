@@ -17,7 +17,7 @@ module.exports.taxRate2017 = function(req, res) {
     res
         .status(200)
         .json(result);
-}
+};
 
 module.exports.calculateTax = function(req, res) {
     if(!req.params.income || isNaN(req.params.income)) {
@@ -37,7 +37,7 @@ module.exports.calculateTax = function(req, res) {
         .json(incomeTax);
     }
     
-}
+};
 
 var calculateTax = function(income, taxRate) {
     if(isNaN(income)){
@@ -84,4 +84,4 @@ var calculateTax = function(income, taxRate) {
 
     return incomeTax;
     
-} 
+} ;
