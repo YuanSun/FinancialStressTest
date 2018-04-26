@@ -16,8 +16,8 @@ function TaxRateController(incomeTaxFactory){
         .selectAll('div')
         .data(rateArr)
         .enter()
-        .append('div')
-        .style("height", (d) => d + 'px');
+        .append('svg')
+        .attr("height", (d) => d/1000 + 'px');
     });
 
     
