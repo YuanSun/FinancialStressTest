@@ -1,9 +1,22 @@
 var taxRate = require('../data/incomeTaxRate.js');
 
 module.exports.taxRate2017 = function(req, res) {
+    var result = {};
+    result.taxRate = taxRate;
+
+    var incomeArr = [];
+    var incomeTaxArr = [];
+    for (i = 5000; i < 250000; i+= 1000) {
+        incomeArr.push(i);
+        incomeTaxArr.push(calculateTax(i, taxRate));
+    }
+
+    result.incomes = incomeArr;
+    result.incomeTaxes = incomeTaxArr;
+
     res
         .status(200)
-        .json(taxRate);
+        .json(result);
 }
 
 module.exports.calculateTax = function(req, res) {
@@ -35,7 +48,7 @@ var calculateTax = function(income, taxRate) {
 
     // calculate taxIncome
     var rateArr = Object.keys(taxRate);
-    var arrLength = rateArr.length
+    var arrLength = rateArr.length;
     var applicableIncomeTaxRate = {};
 
     if(income && income < rateArr[0]) {
@@ -54,7 +67,7 @@ var calculateTax = function(income, taxRate) {
 
     var federalTax = Math.round(income * applicableIncomeTaxRate.federal / 100);
     var quebecTax = Math.round(income * applicableIncomeTaxRate.quebec / 100);
-    var totalTax = federalTax + quebecTax;
+    var totalTax = Math.round((federalTax + quebecTax)*100) / 100;
     var marginalTaxRate = Math.round(totalTax / income * 100) / 100;
     var afterTax = income - totalTax;
     var monthlyDisposable = Math.round(afterTax / 12 * 100) / 100;

@@ -20,7 +20,7 @@ var marginalIncomeTaxRate2017 = {
 function QuebecMarginalIncomeTaxRate(federal, quebec) {
     this.federal = federal;
     this.quebec = quebec;
-    this.total = Math.round(federal + quebec);
+    this.total = Math.round((federal + quebec) * 100) / 100;
 }
 
 module.exports = marginalIncomeTaxRate2017;
