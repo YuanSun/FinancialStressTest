@@ -6,20 +6,56 @@ function TaxRateController(incomeTaxFactory){
     vm.title = 'Income Tax Rate for ' + currentTaxYear;
     vm.testQuant = 1;
     var rates = {};
+    vm.CHART = {
+        FEDERAL: 'federal',
+        QUEBEC: 'quebec',
+        TOTAL: 'totalTax',
+        AFTERTAX: 'afterTax',
+        MARGINALRATE: 'marginalTaxRate',
+        MONTHLY: 'monthlyDisposable',
+        ANNUALMARGINAL: 'annualmarginal',
+        MONTHLYMARGINAL: 'monthlymarginal'
+    };
+
+    var titlePrefix = "Annual Income vs ";
+    vm.CHARTTITLE = {
+        FEDERAL: 'Federal Income Tax',
+        QUEBEC: 'Quebec Income Tax',
+        TOTAL: 'Total Income Tax',
+        AFTERTAX: 'After Tax Income',
+        MARGINALRATE: 'Marginal Tax Rate',
+        MONTHLY: 'Monthly Disposable Income',
+        ANNUALMARGINAL: 'Marginal Annual Income Increase',
+        MONTHLYMARGINAL: 'Marginal Monthly Income Increase'
+    };
+
     incomeTaxFactory.taxRate().then(function(response) {
         // console.log("Here is in the TaxRateController");
         vm.taxRate = response.taxRate;
+        vm.data = response.incomeTaxes;
+        vm.drawChart(vm.data, vm.CHART.TOTAL);
+    });  
+    vm.incrementQuant = function() {
+        vm.testQuant++;
+    };
+
+    vm.resetQuant = function() {
+        vm.testQuant = 1;
+    };
+
+    vm.drawChart = function(data, chartName) {
+        if(chartName === null || chartName === undefined) {
+            chartName = vm.CHART.MONTHLY;
+        }
 
         /**
          * construct d3 chart
          */
-        vm.data = response.incomeTaxes;
-        var data = vm.data;
         var	margin = {top: 30, right: 20, bottom: 30, left: 70},
             width = 800 - margin.left - margin.right,
             height = 570 - margin.top - margin.bottom;
 
-        var ChartTitle = "Income vs After Tax Monthly Disposable Income";
+        var ChartTitle = titlePrefix + vm.CHARTTITLE.chartName;
         // Set the ranges
         var	x = d3.scaleLinear().range([0, width]);
         var	y = d3.scaleLinear().range([height, 0]);
@@ -30,16 +66,10 @@ function TaxRateController(incomeTaxFactory){
 
         var	yAxis = d3.axisLeft(y).ticks(10);
 
-        var yAxis2 = d3.axisRight(y2).ticks(8);
-
         // Define the line
-        var	valuelineMonth = d3.line()
+        var	valueline = d3.line()
             .x(function(d) { return x(d.income); })
-            .y(function(d) { return y(d.monthlyDisposable); });
-        
-        var valuelineTotalTax = d3.line()
-            .x(function(d) {return x(d.income);})
-            .y(function(d) {return y(d.totalTax);});
+            .y(function(d) { return y(d[chartName]); });
             
         // Adds the svg canvas
         var	svg = d3.select("#chart")
@@ -53,24 +83,17 @@ function TaxRateController(incomeTaxFactory){
         // d3.csv("data.csv", function(error, data) {
             data.forEach(function(d) {
                 //d.date = parseDate(d.date);
-                d.monthlyDisposable = +d.monthlyDisposable;
-                d.totalTax = +d.totalTax;
+                d[chartName] = +d[chartName];
             });
 
             // Scale the range of the data
             x.domain(d3.extent(data, function(d) { return d.income; })).nice();
-            y.domain([0, d3.max(data, function(d) { return d.monthlyDisposable; })]).nice();
-            y2.domain([0, d3.max(data, function(d) { return d.totalTax; })]).nice();
-            // Add the valuelineMonth path.
-            svg.append("path")		// Add the valuelineMonth path.
+            y.domain([0, d3.max(data, function(d) { return d[chartName]; })]).nice();
+            // Add the valueline path.
+            svg.append("path")		// Add the valueline path.
                 .attr("class", "line")
-                .attr("d", valuelineMonth(data));
+                .attr("d", valueline(data));
 
-            // svg.append("path")
-            //     .attr("class", "line")
-            //     .style("stroke", "crimson")
-            //     .attr("d", valuelineTotalTax(data));
-            
             // Add the X Axis
             svg.append("g")			// Add the X Axis
                 .attr("class", "x axis")
@@ -81,10 +104,6 @@ function TaxRateController(incomeTaxFactory){
             svg.append("g")			// Add the Y Axis
                 .attr("class", "y axis")
                 .call(yAxis);
-
-            // svg.append("g")
-            //     .attr("class", "y2 axis")
-            //     .call(yAxis2);
             
             svg.append("g")
                 .call(d3.axisLeft(y))
@@ -103,6 +122,5 @@ function TaxRateController(incomeTaxFactory){
                 .style("font-size", "16px") 
                 .style("text-decoration", "underline")  
                 .text(ChartTitle);
-    });  
- 
+    };
 }
