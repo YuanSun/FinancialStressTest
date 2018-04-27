@@ -16,9 +16,10 @@ function TaxRateController(incomeTaxFactory){
         vm.data = response.incomeTaxes;
         var data = vm.data;
         var	margin = {top: 30, right: 20, bottom: 30, left: 70},
-            width = 1000 - margin.left - margin.right,
+            width = 800 - margin.left - margin.right,
             height = 570 - margin.top - margin.bottom;
 
+        var ChartTitle = "Income vs After Tax Monthly Disposable Income";
         // Set the ranges
         var	x = d3.scaleLinear().range([0, width]);
         var	y = d3.scaleLinear().range([height, 0]);
@@ -61,14 +62,14 @@ function TaxRateController(incomeTaxFactory){
             y.domain([0, d3.max(data, function(d) { return d.monthlyDisposable; })]).nice();
             y2.domain([0, d3.max(data, function(d) { return d.totalTax; })]).nice();
             // Add the valuelineMonth path.
-            // svg.append("path")		// Add the valuelineMonth path.
-            //     .attr("class", "line")
-            //     .attr("d", valuelineMonth(data));
-
-            svg.append("path")
+            svg.append("path")		// Add the valuelineMonth path.
                 .attr("class", "line")
-                .style("stroke", "crimson")
-                .attr("d", valuelineTotalTax(data));
+                .attr("d", valuelineMonth(data));
+
+            // svg.append("path")
+            //     .attr("class", "line")
+            //     .style("stroke", "crimson")
+            //     .attr("d", valuelineTotalTax(data));
             
             // Add the X Axis
             svg.append("g")			// Add the X Axis
@@ -77,23 +78,31 @@ function TaxRateController(incomeTaxFactory){
                 .call(xAxis);
 
             // Add the Y Axis
-            // svg.append("g")			// Add the Y Axis
-            //     .attr("class", "y axis")
-            //     .call(yAxis);
+            svg.append("g")			// Add the Y Axis
+                .attr("class", "y axis")
+                .call(yAxis);
+
+            // svg.append("g")
+            //     .attr("class", "y2 axis")
+            //     .call(yAxis2);
             
             svg.append("g")
-                .attr("class", "y2 axis")
-                .call(yAxis2);
-            
-            // svg.append("g")
-            //     .call(d3.axisLeft(y))
-            //     .append("text")
-            //     .attr("fill", "#000")
-            //     .attr("transform", "rotate(-90)")
-            //     .attr("y", 6)
-            //     .attr("dy", "0.71em")
-            //     .attr("text-anchor", "end")
-            //     .text("Monthly Disposable after Tax ($)");
+                .call(d3.axisLeft(y))
+                .append("text")
+                .attr("fill", "#000")
+                .attr("transform", "rotate(-90)")
+                .attr("y", 6)
+                .attr("dy", "0.71em")
+                .attr("text-anchor", "end")
+                .text("Monthly Disposable after Tax ($)");
+
+            svg.append("text")
+                .attr("x", (width / 2))             
+                .attr("y", 0 - (margin.top / 2))
+                .attr("text-anchor", "middle")  
+                .style("font-size", "16px") 
+                .style("text-decoration", "underline")  
+                .text(ChartTitle);
     });  
  
 }
