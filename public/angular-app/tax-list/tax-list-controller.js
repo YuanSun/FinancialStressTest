@@ -6,6 +6,7 @@ function TaxRateController(incomeTaxFactory){
     vm.title = 'Income Tax Rate for ' + currentTaxYear;
     vm.testQuant = 1;
     var rates = {};
+    var data = [];
     vm.CHART = {
         FEDERAL: 'federal',
         QUEBEC: 'quebec',
@@ -29,11 +30,23 @@ function TaxRateController(incomeTaxFactory){
         MONTHLYMARGINAL: 'Marginal Monthly Income Increase'
     };
 
+    vm.AXISTITLE = {
+        FEDERAL: 'Federal Income Tax ($)',
+        QUEBEC: 'Quebec Income Tax ($)',
+        TOTAL: 'Total Income Tax ($)',
+        AFTERTAX: 'After Tax Income ($)',
+        MARGINALRATE: 'Marginal Tax Rate (%)',
+        MONTHLY: 'Monthly Disposable after Tax ($)',
+        ANNUALMARGINAL: 'Marginal Annual Income Increase (%)',
+        MONTHLYMARGINAL: 'Marginal Monthly Income Increase (%)'
+    };
+
     incomeTaxFactory.taxRate().then(function(response) {
         // console.log("Here is in the TaxRateController");
         vm.taxRate = response.taxRate;
         vm.data = response.incomeTaxes;
-        vm.drawChart(vm.data, vm.CHART.TOTAL);
+        data = vm.data;
+        vm.drawChart(vm.CHART.MONTHLY);
     });  
     vm.incrementQuant = function() {
         vm.testQuant++;
@@ -43,10 +56,12 @@ function TaxRateController(incomeTaxFactory){
         vm.testQuant = 1;
     };
 
-    vm.drawChart = function(data, chartName) {
+    vm.drawChart = function(chartName) {
         if(chartName === null || chartName === undefined) {
             chartName = vm.CHART.MONTHLY;
         }
+        var titleKey = (_.invert(vm.CHART))[chartName];
+        var axisTitle = (_.invert(vm.CHART))[chartName];
 
         /**
          * construct d3 chart
@@ -55,16 +70,15 @@ function TaxRateController(incomeTaxFactory){
             width = 800 - margin.left - margin.right,
             height = 570 - margin.top - margin.bottom;
 
-        var ChartTitle = titlePrefix + vm.CHARTTITLE.chartName;
+        var ChartTitle = titlePrefix + vm.CHARTTITLE[titleKey];
         // Set the ranges
         var	x = d3.scaleLinear().range([0, width]);
         var	y = d3.scaleLinear().range([height, 0]);
 
-        var y2 = d3.scaleLinear().range([height, 0]);
         // Define the axes
-        var	xAxis = d3.axisBottom(x).ticks(10);
+        var	xAxis = d3.axisBottom(x).ticks(10).tickSize(-height, 0, 0);
 
-        var	yAxis = d3.axisLeft(y).ticks(10);
+        var	yAxis = d3.axisLeft(y).ticks(8).tickSize(-width, 0, 0).tickFormat("");
 
         // Define the line
         var	valueline = d3.line()
@@ -96,13 +110,13 @@ function TaxRateController(incomeTaxFactory){
 
             // Add the X Axis
             svg.append("g")			// Add the X Axis
-                .attr("class", "x axis")
+                .attr("class", "x axis grid")
                 .attr("transform", "translate(0," + height + ")")
                 .call(xAxis);
 
             // Add the Y Axis
             svg.append("g")			// Add the Y Axis
-                .attr("class", "y axis")
+                .attr("class", "y axis grid")
                 .call(yAxis);
             
             svg.append("g")
@@ -113,7 +127,7 @@ function TaxRateController(incomeTaxFactory){
                 .attr("y", 6)
                 .attr("dy", "0.71em")
                 .attr("text-anchor", "end")
-                .text("Monthly Disposable after Tax ($)");
+                .text(vm.AXISTITLE[axisTitle]);
 
             svg.append("text")
                 .attr("x", (width / 2))             
@@ -122,5 +136,11 @@ function TaxRateController(incomeTaxFactory){
                 .style("font-size", "16px") 
                 .style("text-decoration", "underline")  
                 .text(ChartTitle);
+
+    };
+
+    vm.updateChart = function(chartName) {
+        d3.selectAll("svg").remove();
+        vm.drawChart(chartName);
     };
 }

@@ -87,3 +87,16 @@ path {
     top: 100%;
     left: 0;
   }
+
+.grid .tick {
+    stroke: lightgrey;
+    opacity: 0.5;
+}
+.grid path {
+      stroke-width: 1;
+}
+.grid text {
+    opacity: 1;
+    stroke : black;
+    stroke-width: 1;
+}

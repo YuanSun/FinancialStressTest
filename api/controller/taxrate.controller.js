@@ -55,7 +55,7 @@ var calculateTax = function(income, taxRate) {
         applicableIncomeTaxRate = taxRate[rateArr[0]]; 
     }
 
-    if(income && income > rateArr[arrLength - 1]) {
+    if(income && income >= rateArr[arrLength - 1]) {
         applicableIncomeTaxRate = taxRate[rateArr[arrLength - 1]];
     }
 

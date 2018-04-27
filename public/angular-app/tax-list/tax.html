@@ -35,10 +35,13 @@
 
     <div class="income-chart col-l-6" style="margin-left: 80px; margin-top:20px; display: inline-block;">
         <div id="chart"></div>
-        <div>
-            <button class="button button1" ng-click="vm.incrementQuant()">Increment</button>
-            <button class="button button1" ng-click="vm.resetQuant()">Reset</button>
-            <label ng-model="vm.testQuant">{{vm.testQuant}}</label>
+        <div class="btn-group btn-group-sm">
+            <button class="button btn btn-primary" ng-click="vm.updateChart(vm.CHART.TOTAL)">{{vm.CHARTTITLE.TOTAL}}</button>
+            <button class="button btn btn-primary" ng-click="vm.updateChart(vm.CHART.FEDERAL)">{{vm.CHARTTITLE.FEDERAL}}</button>
+            <button class="button btn btn-primary" ng-click="vm.updateChart(vm.CHART.QUEBEC)">{{vm.CHARTTITLE.QUEBEC}}</button>
+            <button class="button btn btn-primary" ng-click="vm.updateChart(vm.CHART.MARGINALRATE)">{{vm.CHARTTITLE.MARGINALRATE}}</button>
+            <button class="button btn btn-primary" ng-click="vm.updateChart(vm.CHART.AFTERTAX)">{{vm.CHARTTITLE.AFTERTAX}}</button>
+            <button class="button btn btn-primary" ng-click="vm.updateChart(vm.CHART.MONTHLY)">{{vm.CHARTTITLE.MONTHLY}}</button>
         </div>
     </div>
 </div>
