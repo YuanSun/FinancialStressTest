@@ -14,7 +14,7 @@ function TaxCalculatorController(incomeTaxFactory){
         marginalTaxRate: 'Marginal Tax Rate (%)',
         monthlyDisposable: 'Monthly Disposable Income ($)'
     };
-    vm.enteredIncome = DEFAULTINCOME;
+    vm.enteredIncome = undefined;
 
     vm.calculateTax = function(income) {
         incomeTaxFactory.incomeTax(income).then(function(response) {
@@ -24,7 +24,7 @@ function TaxCalculatorController(incomeTaxFactory){
 
     vm.resultIncome = function() {
         vm.calculatedResult = {};
-        vm.enteredIncome = DEFAULTINCOME;
+        vm.enteredIncome = undefined;
     };
 
 
