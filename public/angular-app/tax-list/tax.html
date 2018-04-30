@@ -33,15 +33,22 @@
         </div>
     </div>
 
-    <div class="income-chart col-l-6" style="margin-left: 80px; margin-top:20px; display: inline-block;">
-        <div id="chart"></div>
-        <div class="btn-group btn-group-sm">
-            <button class="button btn btn-primary" ng-click="vm.updateChart(vm.CHART.TOTAL)">{{vm.CHARTTITLE.TOTAL}}</button>
-            <button class="button btn btn-primary" ng-click="vm.updateChart(vm.CHART.FEDERAL)">{{vm.CHARTTITLE.FEDERAL}}</button>
-            <button class="button btn btn-primary" ng-click="vm.updateChart(vm.CHART.QUEBEC)">{{vm.CHARTTITLE.QUEBEC}}</button>
-            <button class="button btn btn-primary" ng-click="vm.updateChart(vm.CHART.MARGINALRATE)">{{vm.CHARTTITLE.MARGINALRATE}}</button>
-            <button class="button btn btn-primary" ng-click="vm.updateChart(vm.CHART.AFTERTAX)">{{vm.CHARTTITLE.AFTERTAX}}</button>
-            <button class="button btn btn-primary" ng-click="vm.updateChart(vm.CHART.MONTHLY)">{{vm.CHARTTITLE.MONTHLY}}</button>
-        </div>
+    <div class="income-calculator col-l-6" style="margin-left: 80px; margin-top:20px; display: inline-block;">
+        <label>Please input your annually income</label><br>     
+        <label>Anually income:</label><input type="text" name="annual-income" value="800000"></input>
+        <input type="submit" class="button btn btn-primary" value="Calculate"></button>
+    </div>
+</div>
+
+<br>
+<div class="income-chart" style="margin-left: 80px; margin-top:20px; display: inline-block;">
+    <div id="chart"></div>
+    <div class="btn-group btn-group-sm">
+        <button class="button btn btn-primary" ng-click="vm.updateChart(vm.CHART.TOTAL)">{{vm.CHARTTITLE.TOTAL}}</button>
+        <button class="button btn btn-primary" ng-click="vm.updateChart(vm.CHART.FEDERAL)">{{vm.CHARTTITLE.FEDERAL}}</button>
+        <button class="button btn btn-primary" ng-click="vm.updateChart(vm.CHART.QUEBEC)">{{vm.CHARTTITLE.QUEBEC}}</button>
+        <button class="button btn btn-primary" ng-click="vm.updateChart(vm.CHART.MARGINALRATE)">{{vm.CHARTTITLE.MARGINALRATE}}</button>
+        <button class="button btn btn-primary" ng-click="vm.updateChart(vm.CHART.AFTERTAX)">{{vm.CHARTTITLE.AFTERTAX}}</button>
+        <button class="button btn btn-primary" ng-click="vm.updateChart(vm.CHART.MONTHLY)">{{vm.CHARTTITLE.MONTHLY}}</button>
     </div>
 </div>
