@@ -10,5 +10,10 @@ function config($routeProvider) {
             templateUrl : 'angular-app/tax-list/tax.html',
             controller: TaxRateController,
             controllerAs: 'vm'
+        })
+        .when('/taxcalculator', {
+            templateUrl: 'angular-app/tax-calculator/tax-calculator.html',
+            controller: TaxCalculatorController,
+            controllerAs: 'vm'
         });
 }
