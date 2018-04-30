@@ -33,10 +33,16 @@
         </div>
     </div>
 
-    <div class="income-calculator col-l-6" style="margin-left: 80px; margin-top:20px; display: inline-block;">
-        <label>Please input your annually income</label><br>     
-        <label>Anually income:</label><input type="text" name="annual-income" value="800000"></input>
-        <input type="submit" class="button btn btn-primary" value="Calculate"></button>
+    <div class="income-calculator col-l-6" style="margin-left: 80px; margin-top:20px; display: inline-block;">  
+        <label>Anually income:</label> $<input type="text" class="annual-income" name="annual-income" value="vm.enteredIncome" ng-model="vm.enteredIncome"></input>
+        <input type="submit" class="button btn btn-primary" value="Calculate" ng-click="vm.calculateTax(vm.enteredIncome)"></input>
+        <input type="submit" class="button btn btn-warning" value="Reset" ng-click="vm.resultIncome()"></input>
+        <br/>
+        <div ng-model="vm.calcualtedResult" ng-hide="!vm.calculatedResult">
+            <ul>
+                <li ng-model="vm.CAPTION" ng-repeat="(k, v) in vm.calculatedResult">{{vm.CAPTION[k]}}:  {{v}}</li>
+            </ul>
+        </div>
     </div>
 </div>
 

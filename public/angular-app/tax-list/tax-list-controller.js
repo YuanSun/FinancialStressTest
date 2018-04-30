@@ -2,11 +2,22 @@ angular.module('incometax').controller('TaxRateController', TaxRateController);
 
 function TaxRateController(incomeTaxFactory){
     var vm = this;
+    var DEFAULTINCOME = 80000;
     var currentTaxYear = '2017';
     vm.title = 'Income Tax Rate for ' + currentTaxYear;
     vm.testQuant = 1;
     var rates = {};
     var data = [];
+    vm.CAPTION = {
+        income: 'Income ($)',
+        federal : 'Federa Income Tax ($)',
+        quebec: 'Quebec Income Tax ($)',
+        totalTax:  'Total Income Tax ($)',
+        afterTax: 'After Tax Income ($)',
+        marginalTaxRate: 'Marginal Tax Rate (%)',
+        monthlyDisposable: 'Monthly Disposable Income ($)'
+    };
+
     vm.CHART = {
         FEDERAL: 'federal',
         QUEBEC: 'quebec',
@@ -41,6 +52,7 @@ function TaxRateController(incomeTaxFactory){
         MONTHLYMARGINAL: 'Marginal Monthly Income Increase (%)'
     };
 
+    vm.enteredIncome = DEFAULTINCOME;
     incomeTaxFactory.taxRate().then(function(response) {
         // console.log("Here is in the TaxRateController");
         vm.taxRate = response.taxRate;
@@ -142,5 +154,16 @@ function TaxRateController(incomeTaxFactory){
     vm.updateChart = function(chartName) {
         d3.selectAll("svg").remove();
         vm.drawChart(chartName);
+    };
+
+    vm.calculateTax = function(income) {
+        incomeTaxFactory.incomeTax(income).then(function(response) {
+            vm.calculatedResult = response;
+        });
+    };
+
+    vm.resultIncome = function() {
+        vm.calculatedResult = {};
+        vm.enteredIncome = DEFAULTINCOME;
     };
 }

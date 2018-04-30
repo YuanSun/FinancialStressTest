@@ -46,6 +46,11 @@ body {
     color: white;
 }
 
+.annual-income {
+    display: inline-block;
+    margin: 0px 5px;
+}
+
 path { 
     stroke: steelblue;
       stroke-width: 2;
