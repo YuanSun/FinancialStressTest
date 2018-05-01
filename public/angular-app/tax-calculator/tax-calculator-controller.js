@@ -26,6 +26,7 @@ function TaxCalculatorController(incomeTaxFactory){
     vm.resultIncome = function() {
         vm.calculatedResult = {};
         vm.enteredIncome = undefined;
+        vm.calculatedResults = {};
     };
 
     vm.addResultArr = function(result) {

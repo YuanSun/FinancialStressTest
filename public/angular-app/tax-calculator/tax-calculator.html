@@ -1,6 +1,7 @@
 <h3 style="margin-left: 80px; margin-top: 20px;">{{vm.title}}</h3>
 <div class="income-calculator" style="margin-left: 80px; margin-top:20px; display: inline-block;">  
-    <label>Anually income:</label> $<input type="number" class="annual-income form-control" name="annual-income" placeholder="Enter your income" ng-model="vm.enteredIncome" ng-keyup="vm.calculateTax(vm.enteredIncome)" min="1"></input>
+    <label>Anually income:</label> 
+    $<input type="number" class="annual-income form-control" name="annual-income" placeholder="Enter your income" ng-model="vm.enteredIncome" ng-keyup="vm.calculateTax(vm.enteredIncome)" min="1" style="width: 250px"></input>
     <!-- <input type="submit" class="button btn btn-primary" value="Calculate Tax" ng-click="vm.calculateTax(vm.enteredIncome)"></input> -->
     
     <br/>
