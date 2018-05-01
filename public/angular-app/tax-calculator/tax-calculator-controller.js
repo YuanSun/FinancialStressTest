@@ -2,6 +2,7 @@ angular.module('incometax').controller('TaxCalculatorController', TaxCalculatorC
 
 function TaxCalculatorController(incomeTaxFactory){
     var vm = this;
+    vm.calculatedResults = [];
     var DEFAULTINCOME = 80000;
     var currentTaxYear = '2017';
     vm.title = 'Calculator Income Tax of Year ' + currentTaxYear;
@@ -12,7 +13,7 @@ function TaxCalculatorController(incomeTaxFactory){
         totalTax:  'Total Income Tax ($)',
         afterTax: 'After Tax Income ($)',
         marginalTaxRate: 'Marginal Tax Rate (%)',
-        monthlyDisposable: 'Monthly Disposable Income ($)'
+        monthlyDisposable: 'Monthly Disposable ($)'
     };
     vm.enteredIncome = undefined;
 
@@ -27,5 +28,7 @@ function TaxCalculatorController(incomeTaxFactory){
         vm.enteredIncome = undefined;
     };
 
-
+    vm.addResultArr = function(result) {
+        vm.calculatedResults.push(result);
+    };
 }

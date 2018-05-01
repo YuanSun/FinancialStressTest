@@ -1,13 +1,22 @@
 <h3 style="margin-left: 80px; margin-top: 20px;">{{vm.title}}</h3>
 <div class="income-calculator" style="margin-left: 80px; margin-top:20px; display: inline-block;">  
-        <label>Anually income:</label> $<input type="number" class="annual-income form-control" name="annual-income" placeholder="Enter your income" ng-model="vm.enteredIncome" ng-keyup="vm.calculateTax(vm.enteredIncome)"></input>
-        <!-- <input type="submit" class="button btn btn-primary" value="Calculate Tax" ng-click="vm.calculateTax(vm.enteredIncome)"></input> -->
-        
+    <label>Anually income:</label> $<input type="number" class="annual-income form-control" name="annual-income" placeholder="Enter your income" ng-model="vm.enteredIncome" ng-keyup="vm.calculateTax(vm.enteredIncome)" min="1"></input>
+    <!-- <input type="submit" class="button btn btn-primary" value="Calculate Tax" ng-click="vm.calculateTax(vm.enteredIncome)"></input> -->
+    
+    <br/>
+    <div ng-model="vm.calcualtedResult" ng-hide="!vm.calculatedResult">
+        <ul>
+            <li ng-model="vm.CAPTION" ng-repeat="(k, v) in vm.calculatedResult">{{vm.CAPTION[k]}}:  {{v}}</li>
+        </ul>
+    </div>
+    <input type="submit" class="button btn btn-primary" value="Add to comparison" ng-click="vm.addResultArr(vm.calculatedResult)" stype="display: inline-block"></input>
+    <input type="submit" class="button btn btn-warning" value="Reset" ng-click="vm.resultIncome()" style="display:inline-block"></input>
+
+    <div class="result-comparison" ng-hide="!vm.calculatedResults">
+        <ul ng-repeat="result in vm.calculatedResults" style="display:inline-block; margin: 8px;">
+            <li ng-repeat="(k, v) in result">{{vm.CAPTION[k]}}: {{v}}</li>
+        </ul>
         <br/>
-        <div ng-model="vm.calcualtedResult" ng-hide="!vm.calculatedResult">
-            <ul>
-                <li ng-model="vm.CAPTION" ng-repeat="(k, v) in vm.calculatedResult">{{vm.CAPTION[k]}}:  {{v}}</li>
-            </ul>
-        </div>
-        <input type="submit" class="button btn btn-warning" value="Reset" ng-click="vm.resultIncome()" style="display:inline-block"></input>
+    </div>
+
 </div>
